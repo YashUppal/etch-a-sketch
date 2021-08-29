@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+:root {
+  --main-bg-color: white;
+  --main-color: #6b6969;
+}
+
+* {
+    font-family: 'Fredoka One', cursive;
+    font-weight: lighter;
+}
+
+.square {
+    background-color: white;
+}
+
+.outer-container {
+    height: 100%;
+    background-color: var(--main-bg-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    color: var(--main-color);
+    font-size: 35px;
+}
+
+header > h1 {
+    margin:10px 0px;
+
+}
+
+button {
+    padding: 0px;
+    width: 200px;
+    background-color: var(--main-bg-color);
+    color: var(--main-color);
+    border:none;
+    border-right: 13px outset var(--main-color);
+    border-top: 1px outset var(--main-color);
+    border-left: 1px outset var(--main-color);
+    border-bottom: 1px outset var(--main-color);
+}
+
+button:hover {
+    box-sizing: border-box;
+    border-right: 9px outset var(--main-color);
+}
+
+button:active {
+    box-sizing: border-box;
+    border-right: 5px outset var(--main-color);
+}
+
+.canvas {
+    /* border: 1px solid black; */
+    box-shadow:1px 1px 10px black;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.pallete {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-right: 40px;
+}
+
+.inner-container {
+    width: 100%;
+    margin-left: -170px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    /* align-items: flex-start; */
+}
+
+.black {
+    background: black;
+}
+
+.color-wheel {
+    -webkit-appearance: none;
+    width: 100px;
+    height: 50px;
+}
+
+button {
+    height: 40px;
+    width: 100px;
+}
+
+small {
+    color: var(main-color);
+    margin: 0px 0px -20px 0px;
+}
+
+@media (max-width: 900px){
+    .outer-container {
+        width: 900px;
+    }
+}
+
+@media (max-width: 720px) {
+    
+.outer-container {
+        width: 100vw;
+        /* height: 100%; */
+    }
+    header {
+        width: 100vw;
+        text-align: center;
+    }
+
+    .inner-container {
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        margin:0px;
+        background-color: var(--main-bg-color);
+    }
+
+    .pallete {
+        width: 70vw;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+
+}
+
+@media (max-width: 450px) {
+
+    header {
+        font-size: 20px;
+    }
+
+    .canvas {
+        width: 350px;
+        height: 350px;
+    }
+
+    .color-wheel {
+        height: 20px;
+        width: 40px;
+    }
+
+    button {
+        width: 30%;
+        height: 20%;
+        font-size: 10px;
+    }
+
+    .pallete {
+        justify-content: center;
+        width: 350px;
+        height: 100px;
+    }
+}
