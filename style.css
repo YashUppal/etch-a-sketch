@@ -34,24 +34,29 @@ header > h1 {
 
 button {
     padding: 0px;
+    height: 50px;
     width: 200px;
+    margin: 10px;
     background-color: var(--main-bg-color);
     color: var(--main-color);
-    border:none;
-    border-right: 13px outset var(--main-color);
-    border-top: 1px outset var(--main-color);
-    border-left: 1px outset var(--main-color);
-    border-bottom: 1px outset var(--main-color);
+    border: 1px solid var(--main-color);
+    box-shadow: 10px 10px 37px -5x var(--main-color);
+    -webkit-box-shadow: 10px 10px 37px -5px var(--main-color);
+    -moz-box-shadow: 10px 10px 37px -5px var(--main-color);
 }
 
 button:hover {
     box-sizing: border-box;
-    border-right: 9px outset var(--main-color);
+    box-shadow: 10px 10px 37px -10px var(--main-color);
+    -webkit-box-shadow: 10px 10px 37px -10px var(--main-color);
+    -moz-box-shadow: 10px 10px 37px -10px var(--main-color);
 }
 
 button:active {
     box-sizing: border-box;
-    border-right: 5px outset var(--main-color);
+    box-shadow: 10px 10px 37px -20px var(--main-color);
+    -webkit-box-shadow: 10px 10px 37px -20px var(--main-color);
+    -moz-box-shadow: 10px 10px 37px -20px var(--main-color);
 }
 
 .canvas {
@@ -156,9 +161,11 @@ small {
     }
 
     button {
-        width: 30%;
-        height: 20%;
-        font-size: 10px;
+    width: 30%;
+    padding: 0px;
+    height: 50px;
+    margin: 10px;
+    font-size: 10px;
     }
 
     .pallete {
