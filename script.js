@@ -10,7 +10,12 @@ const defaultGrid = () => {
 
 const changeColor = (e, div) => {
     // e.target.classList.add("black")
+
     e.target.style.backgroundColor = CANVAS.color;
+    // e.target.style.opacity = "1"
+    if (!e.target.classList.contains("light")) {
+        e.target.style.opacity = 1;
+    }
 }
 
 const createGrid = (size) => {
@@ -29,6 +34,7 @@ const createGrid = (size) => {
             square.classList.add('square')
             square.style.width = width;
             square.style.height = height;
+            square.style.opacity = "1"
             square.addEventListener('mouseenter',changeColor)
 
             document.querySelector(".canvas").appendChild(square);
@@ -42,9 +48,8 @@ const clearGrid = () => {
     while (document.querySelector('.canvas').firstChild) {
         document.querySelector('.canvas').removeChild(document.querySelector('.canvas').firstChild)
     }
-    createGrid(CANVAS.size)
-    removeEvent();
-    CANVAS.color = document.querySelector('.color-wheel').value;
+    createGrid(CANVAS.size);
+
 }
 
 const watchColorPicker = (event) => {
@@ -52,9 +57,21 @@ const watchColorPicker = (event) => {
     CANVAS.color = event.target.value;
 }
 
+const white = (e) => {
+    e.target.style.backgroundColor = "white"
+    e.target.classList.add('erased')
+    
+    // e.target.style.opacity = "1"
+}
+
 const watchEraser = (event) => {
-    CANVAS.color = "white";
-    removeEvent();
+    const squares = document.querySelectorAll('.square');
+    squares.forEach(
+        (element) => {
+            element.addEventListener('mouseenter', white)
+        }
+    )
+    
 }
 
 const watchSlider = (event) => {
@@ -72,12 +89,15 @@ function getRandomColor() {
     return color;
 }
 
-const setRandomColor = () => {
+const setRandomColor = (e) => {
+    e.target.style.opacity = "1"
+    e.target.style.backgroundColor = getRandomColor();
     CANVAS.color = getRandomColor()
 }
 
 
 const watchRainbow = () => {
+    removeEvent();
     const squares = document.querySelectorAll('.square');
     squares.forEach(
         (element) => {
@@ -86,6 +106,8 @@ const watchRainbow = () => {
             )
         }
     )
+
+    
     console.log(squares)
 }
 
@@ -98,13 +120,61 @@ const removeEvent = () => {
             )
         }
     )
+
+    squares.forEach(
+        (element) => {
+            element.removeEventListener('mouseenter', gradualBlack)
+        }
+    )
+
+    squares.forEach(
+        (element) => {
+            element.removeEventListener('mouseenter', white)
+        }
+    )
 }
+
 
 const watchColor = () => {
     CANVAS.color = document.querySelector(".color-wheel").value;
     removeEvent();
+
+    const squares = document.querySelectorAll('.square')
+    squares.forEach(
+        
+        (element) => {
+            element.classList.remove("light")
+            element.classList.remove("erased")
+            element.addEventListener('mouseenter', changeColor)
+        }
+    )
 }
 
+const gradualBlack = (e) => {
+    // console.log(e.target.classList.contains("light"));
+    if (e.target.classList.contains('erased')) {
+        e.target.style.opacity = "0.1"
+        e.target.classList.add('light')
+        e.target.classList.remove("erased")
+    } else if (e.target.classList.contains("light")) {
+        // e.target.classList.remove("light")
+        e.target.style.opacity = `${parseFloat(e.target.style.opacity) + 0.1}`
+    } else {
+        e.target.classList.add('light')
+        e.target.style.opacity = "0.1"
+    }
+}
+
+const gradual = () => {
+    removeEvent();
+    CANVAS.color = "black";
+    const squares = document.querySelectorAll('.square');
+    squares.forEach(
+        (element) => {
+            element.addEventListener('mouseenter',gradualBlack)
+        }
+    )
+}
 
 
 
@@ -115,4 +185,5 @@ document.querySelector('#eraser-mode').addEventListener("click", watchEraser)
 document.querySelector('#size-slider').addEventListener("change", watchSlider)
 document.querySelector("#clear").addEventListener("click",clearGrid)
 document.querySelector("#rainbow-mode").addEventListener("click", watchRainbow)
+document.querySelector("#gradual-mode").addEventListener("click", gradual)
 document.querySelector('#color-mode').addEventListener("click",watchColor)
